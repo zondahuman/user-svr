@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abin.lee.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.abin.lee.model.UserInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="education_degree" property="educationDegree" jdbcType="VARCHAR" />
+    <result column="education_photo_path" property="educationPhotoPath" jdbcType="VARCHAR" />
+    <result column="education_type" property="educationType" jdbcType="VARCHAR" />
+    <result column="edu_sync_status" property="eduSyncStatus" jdbcType="VARCHAR" />
+    <result column="enrol_date" property="enrolDate" jdbcType="VARCHAR" />
+    <result column="graduate_time" property="graduateTime" jdbcType="VARCHAR" />
+    <result column="graduate" property="graduate" jdbcType="VARCHAR" />
+    <result column="speciality_name" property="specialityName" jdbcType="VARCHAR" />
+    <result column="study_result" property="studyResult" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="id_card_photo_path" property="idCardPhotoPath" jdbcType="VARCHAR" />
+    <result column="id_card_sync_status" property="idCardSyncStatus" jdbcType="VARCHAR" />
+    <result column="id_no" property="idNo" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="reserve_mobile" property="reserveMobile" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="channelId" property="channelid" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, education_degree, education_photo_path, education_type, edu_sync_status, enrol_date, 
+    graduate_time, graduate, speciality_name, study_result, card_no, channel_code, id_card_photo_path, 
+    id_card_sync_status, id_no, nick_name, real_name, mobile, reserve_mobile, user_type, 
+    channel, channelId, platform
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.abin.lee.model.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.abin.lee.model.UserInfoExample" >
+    delete from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.abin.lee.model.UserInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info (education_degree, education_photo_path, 
+      education_type, edu_sync_status, enrol_date, 
+      graduate_time, graduate, speciality_name, 
+      study_result, card_no, channel_code, 
+      id_card_photo_path, id_card_sync_status, id_no, 
+      nick_name, real_name, mobile, 
+      reserve_mobile, user_type, channel, 
+      channelId, platform)
+    values (#{educationDegree,jdbcType=VARCHAR}, #{educationPhotoPath,jdbcType=VARCHAR}, 
+      #{educationType,jdbcType=VARCHAR}, #{eduSyncStatus,jdbcType=VARCHAR}, #{enrolDate,jdbcType=VARCHAR}, 
+      #{graduateTime,jdbcType=VARCHAR}, #{graduate,jdbcType=VARCHAR}, #{specialityName,jdbcType=VARCHAR}, 
+      #{studyResult,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, #{channelCode,jdbcType=VARCHAR}, 
+      #{idCardPhotoPath,jdbcType=VARCHAR}, #{idCardSyncStatus,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{reserveMobile,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{channelid,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abin.lee.model.UserInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="educationDegree != null" >
+        education_degree,
+      </if>
+      <if test="educationPhotoPath != null" >
+        education_photo_path,
+      </if>
+      <if test="educationType != null" >
+        education_type,
+      </if>
+      <if test="eduSyncStatus != null" >
+        edu_sync_status,
+      </if>
+      <if test="enrolDate != null" >
+        enrol_date,
+      </if>
+      <if test="graduateTime != null" >
+        graduate_time,
+      </if>
+      <if test="graduate != null" >
+        graduate,
+      </if>
+      <if test="specialityName != null" >
+        speciality_name,
+      </if>
+      <if test="studyResult != null" >
+        study_result,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="channelCode != null" >
+        channel_code,
+      </if>
+      <if test="idCardPhotoPath != null" >
+        id_card_photo_path,
+      </if>
+      <if test="idCardSyncStatus != null" >
+        id_card_sync_status,
+      </if>
+      <if test="idNo != null" >
+        id_no,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="reserveMobile != null" >
+        reserve_mobile,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="channelid != null" >
+        channelId,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="educationDegree != null" >
+        #{educationDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="educationPhotoPath != null" >
+        #{educationPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="educationType != null" >
+        #{educationType,jdbcType=VARCHAR},
+      </if>
+      <if test="eduSyncStatus != null" >
+        #{eduSyncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enrolDate != null" >
+        #{enrolDate,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateTime != null" >
+        #{graduateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="graduate != null" >
+        #{graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialityName != null" >
+        #{specialityName,jdbcType=VARCHAR},
+      </if>
+      <if test="studyResult != null" >
+        #{studyResult,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCode != null" >
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardPhotoPath != null" >
+        #{idCardPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardSyncStatus != null" >
+        #{idCardSyncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveMobile != null" >
+        #{reserveMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.abin.lee.model.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.educationDegree != null" >
+        education_degree = #{record.educationDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationPhotoPath != null" >
+        education_photo_path = #{record.educationPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationType != null" >
+        education_type = #{record.educationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduSyncStatus != null" >
+        edu_sync_status = #{record.eduSyncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enrolDate != null" >
+        enrol_date = #{record.enrolDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateTime != null" >
+        graduate_time = #{record.graduateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduate != null" >
+        graduate = #{record.graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialityName != null" >
+        speciality_name = #{record.specialityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyResult != null" >
+        study_result = #{record.studyResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null" >
+        card_no = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelCode != null" >
+        channel_code = #{record.channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardPhotoPath != null" >
+        id_card_photo_path = #{record.idCardPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardSyncStatus != null" >
+        id_card_sync_status = #{record.idCardSyncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNo != null" >
+        id_no = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserveMobile != null" >
+        reserve_mobile = #{record.reserveMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelid != null" >
+        channelId = #{record.channelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_info
+    set id = #{record.id,jdbcType=INTEGER},
+      education_degree = #{record.educationDegree,jdbcType=VARCHAR},
+      education_photo_path = #{record.educationPhotoPath,jdbcType=VARCHAR},
+      education_type = #{record.educationType,jdbcType=VARCHAR},
+      edu_sync_status = #{record.eduSyncStatus,jdbcType=VARCHAR},
+      enrol_date = #{record.enrolDate,jdbcType=VARCHAR},
+      graduate_time = #{record.graduateTime,jdbcType=VARCHAR},
+      graduate = #{record.graduate,jdbcType=VARCHAR},
+      speciality_name = #{record.specialityName,jdbcType=VARCHAR},
+      study_result = #{record.studyResult,jdbcType=VARCHAR},
+      card_no = #{record.cardNo,jdbcType=VARCHAR},
+      channel_code = #{record.channelCode,jdbcType=VARCHAR},
+      id_card_photo_path = #{record.idCardPhotoPath,jdbcType=VARCHAR},
+      id_card_sync_status = #{record.idCardSyncStatus,jdbcType=VARCHAR},
+      id_no = #{record.idNo,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      reserve_mobile = #{record.reserveMobile,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      channelId = #{record.channelid,jdbcType=INTEGER},
+      platform = #{record.platform,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abin.lee.model.UserInfo" >
+    update user_info
+    <set >
+      <if test="educationDegree != null" >
+        education_degree = #{educationDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="educationPhotoPath != null" >
+        education_photo_path = #{educationPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="educationType != null" >
+        education_type = #{educationType,jdbcType=VARCHAR},
+      </if>
+      <if test="eduSyncStatus != null" >
+        edu_sync_status = #{eduSyncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="enrolDate != null" >
+        enrol_date = #{enrolDate,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateTime != null" >
+        graduate_time = #{graduateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="graduate != null" >
+        graduate = #{graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialityName != null" >
+        speciality_name = #{specialityName,jdbcType=VARCHAR},
+      </if>
+      <if test="studyResult != null" >
+        study_result = #{studyResult,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCode != null" >
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardPhotoPath != null" >
+        id_card_photo_path = #{idCardPhotoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardSyncStatus != null" >
+        id_card_sync_status = #{idCardSyncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        id_no = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveMobile != null" >
+        reserve_mobile = #{reserveMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        channelId = #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abin.lee.model.UserInfo" >
+    update user_info
+    set education_degree = #{educationDegree,jdbcType=VARCHAR},
+      education_photo_path = #{educationPhotoPath,jdbcType=VARCHAR},
+      education_type = #{educationType,jdbcType=VARCHAR},
+      edu_sync_status = #{eduSyncStatus,jdbcType=VARCHAR},
+      enrol_date = #{enrolDate,jdbcType=VARCHAR},
+      graduate_time = #{graduateTime,jdbcType=VARCHAR},
+      graduate = #{graduate,jdbcType=VARCHAR},
+      speciality_name = #{specialityName,jdbcType=VARCHAR},
+      study_result = #{studyResult,jdbcType=VARCHAR},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      id_card_photo_path = #{idCardPhotoPath,jdbcType=VARCHAR},
+      id_card_sync_status = #{idCardSyncStatus,jdbcType=VARCHAR},
+      id_no = #{idNo,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      reserve_mobile = #{reserveMobile,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      channelId = #{channelid,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
