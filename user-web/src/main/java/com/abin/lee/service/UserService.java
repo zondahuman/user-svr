@@ -46,9 +46,9 @@ public class UserService {
                 public void afterCompletion(int status) {
                     super.afterCompletion(status);
                     log.error("add2---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
-
+                    log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
                     if (status == TransactionSynchronization.STATUS_COMMITTED) {
-                        log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED=...", TransactionSynchronization.STATUS_COMMITTED);
+                        log.error("afterCompletion---------status == TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
 
                     }
                 }
