@@ -47,5 +47,11 @@ public class OrderServiceImpl implements OrderService {
         return list;
     }
 
-
+    @Override
+    public List<OrderInfo> findAll(String flag) {
+        OrderInfoExample ex = new OrderInfoExample();
+        ex.createCriteria().andFlagEqualTo(flag);
+        List<OrderInfo> list = this.orderInfoMapper.selectByExample(ex);
+        return list;
+    }
 }

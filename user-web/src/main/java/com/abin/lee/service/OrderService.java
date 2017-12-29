@@ -17,4 +17,6 @@ public interface OrderService {
 
     List<OrderInfo> findAll(Integer id, String flag);
 
+    List<OrderInfo> findAll(String flag);
+
 }
