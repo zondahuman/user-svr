@@ -32,7 +32,7 @@ public class UserService {
     BasicDataSource dataSource;
 
     public void add(UserInfoDto userInfoDto) throws InvocationTargetException, IllegalAccessException {
-        Long threadId = Thread.currentThread().getId();
+        String threadId = Thread.currentThread().getName();
         log.error("add1---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
         UserInfo userInfo = new UserInfo();
