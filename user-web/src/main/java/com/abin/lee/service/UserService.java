@@ -32,7 +32,8 @@ public class UserService {
     BasicDataSource dataSource;
 
     public void add(UserInfoDto userInfoDto) throws InvocationTargetException, IllegalAccessException {
-        log.error("add1---userInfoDto={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", JsonUtil.toJson(userInfoDto), dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+        Long threadId = Thread.currentThread().getId();
+        log.error("add1---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(userInfo, userInfoDto);
@@ -44,7 +45,7 @@ public class UserService {
                 @Override
                 public void afterCompletion(int status) {
                     super.afterCompletion(status);
-                    log.error("add2---userInfoDto={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", JsonUtil.toJson(userInfoDto), dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+                    log.error("add2---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
                     if (status == TransactionSynchronization.STATUS_COMMITTED) {
                         log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED=...", TransactionSynchronization.STATUS_COMMITTED);
@@ -55,7 +56,7 @@ public class UserService {
         }else{
             log.error("else---TransactionSynchronizationManager.isActualTransactionActive()=.... ", TransactionSynchronizationManager.isActualTransactionActive());
         }
-        log.error("add3---userInfoDto={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", JsonUtil.toJson(userInfoDto), dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+        log.error("add3---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
     }
 
