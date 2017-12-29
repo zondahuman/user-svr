@@ -47,7 +47,7 @@ public class UserService {
                     log.error("add2---userInfoDto={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", JsonUtil.toJson(userInfoDto), dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
                     if (status == TransactionSynchronization.STATUS_COMMITTED) {
-                        log.error("TransactionSynchronization.STATUS_COMMITTED=...", TransactionSynchronization.STATUS_COMMITTED);
+                        log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED=...", TransactionSynchronization.STATUS_COMMITTED);
 
                     }
                 }
