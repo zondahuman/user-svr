@@ -16,14 +16,32 @@
 
 
     <!-- mysql数据源 -->
-    <bean id="dataSource"
-          class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.mysql.driverClass}" />
-        <property name="jdbcUrl" value="${jdbc.mysql.url}" />
-        <property name="user" value="${jdbc.mysql.username}" />
-        <property name="password" value="${jdbc.mysql.password}" />
-	</bean>
+    <!--<bean id="dataSource"-->
+          <!--class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
+        <!--<property name="driverClass" value="${jdbc.mysql.driverClass}" />-->
+        <!--<property name="jdbcUrl" value="${jdbc.mysql.url}" />-->
+        <!--<property name="user" value="${jdbc.mysql.username}" />-->
+        <!--<property name="password" value="${jdbc.mysql.password}" />-->
+	<!--</bean>-->
 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.mysql.driverClass}" />
+        <property name="username" value="${jdbc.mysql.username}" />
+        <property name="password" value="${jdbc.mysql.password}" />
+        <property name="url" value="${jdbc.mysql.url}" />
+
+        <property name="maxActive" value="${jdbc.mysql.max_active}" />
+        <property name="maxIdle" value="${jdbc.mysql.max_idle}" />
+        <property name="maxWait" value="${jdbc.mysql.max_wait}" />
+
+        <property name="validationQuery" value="${jdbc.mysql.validation_query}" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnReturn" value="true" />
+        <property name="removeAbandoned" value="true"></property>
+        <property name="removeAbandonedTimeout" value="180"></property>
+    </bean>
 
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -40,7 +58,6 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
         <property name="basePackage" value="com.abin.**.dao" />
     </bean>
-
 
     <!-- 定义事务管理器（声明式的事务） -->
     <!-- <bean id="aspectBean" class="com.ln.util.aop.SpringAspectBean" /> -->

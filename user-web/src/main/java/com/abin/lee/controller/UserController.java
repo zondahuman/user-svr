@@ -3,6 +3,7 @@ package com.abin.lee.controller;
 import com.abin.lee.dao.UserInfoMapper;
 import com.abin.lee.model.UserInfo;
 import com.abin.lee.service.UserService;
+import com.abin.lee.vo.UserInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import java.util.List;
  * Be Created in 2016/11/29.
  */
 @Controller
-@RequestMapping("/trend")
+@RequestMapping("/user")
 public class UserController {
     protected final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -27,6 +28,20 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String add(UserInfoDto userInfoDto) {
+        String flag = "FAILURE";
+        try {
+            this.userService.add(userInfoDto);
+            flag = "SUCCESS";
+        } catch (Exception e) {
+            logger.error("e={}", e);
+        }
+        return flag;
+    }
+
 
     @RequestMapping(value = "/find", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
@@ -39,8 +54,6 @@ public class UserController {
         }
         return userInfo;
     }
-
-
 
 
 }
