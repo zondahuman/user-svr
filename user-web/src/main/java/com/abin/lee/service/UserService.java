@@ -40,7 +40,7 @@ public class UserService {
         userInfo.setCreateTime(new Date());
         userInfo.setUpdateTime(new Date());
         userInfoMapper.insert(userInfo);
-        if(TransactionSynchronizationManager.isSynchronizationActive()) {
+//        if(TransactionSynchronizationManager.isSynchronizationActive()) {
             TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
                 @Override
                 public void afterCompletion(int status) {
@@ -53,9 +53,9 @@ public class UserService {
                     }
                 }
             });
-        }else{
-            log.error("else---TransactionSynchronizationManager.isActualTransactionActive()=.... ", TransactionSynchronizationManager.isActualTransactionActive());
-        }
+//        }else{
+//            log.error("else---TransactionSynchronizationManager.isActualTransactionActive()=.... ", TransactionSynchronizationManager.isActualTransactionActive());
+//        }
         log.error("add3---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
     }
