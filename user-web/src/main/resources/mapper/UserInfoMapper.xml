@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.abin.lee.model.UserInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -108,7 +108,7 @@
     insert into user_info (user_name, age, mobile, 
       create_time, update_time, version
       )
-    values (#{userName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, 
+    values (#{userName,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}
       )
   </insert>
@@ -142,7 +142,7 @@
         #{userName,jdbcType=VARCHAR},
       </if>
       <if test="age != null" >
-        #{age,jdbcType=INTEGER},
+        #{age,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null" >
         #{mobile,jdbcType=VARCHAR},
@@ -174,7 +174,7 @@
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.age != null" >
-        age = #{record.age,jdbcType=INTEGER},
+        age = #{record.age,jdbcType=VARCHAR},
       </if>
       <if test="record.mobile != null" >
         mobile = #{record.mobile,jdbcType=VARCHAR},
@@ -197,7 +197,7 @@
     update user_info
     set id = #{record.id,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
-      age = #{record.age,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -213,7 +213,7 @@
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="age != null" >
-        age = #{age,jdbcType=INTEGER},
+        age = #{age,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null" >
         mobile = #{mobile,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
   <update id="updateByPrimaryKey" parameterType="com.abin.lee.model.UserInfo" >
     update user_info
     set user_name = #{userName,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
+      age = #{age,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
