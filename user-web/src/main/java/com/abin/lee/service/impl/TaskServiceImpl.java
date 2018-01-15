@@ -5,6 +5,7 @@ import com.abin.lee.dao.TaskInfoMapper;
 import com.abin.lee.model.*;
 import com.abin.lee.service.TaskService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * user-svr
  * com.abin.lee.task.service
  */
+@Service
 public class TaskServiceImpl implements TaskService {
     @Resource
     TaskInfoMapper taskInfoMapper;

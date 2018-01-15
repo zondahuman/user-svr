@@ -8,6 +8,7 @@ import com.abin.lee.task.enums.FlagEnums;
 import com.abin.lee.task.service.OperatorService;
 import com.abin.lee.task.service.vo.response.ExternalResponse;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Date;
  * user-svr
  * com.abin.lee.task.service.impl
  */
+@Service
 public class OperatorServiceImpl implements OperatorService {
 
     @Resource

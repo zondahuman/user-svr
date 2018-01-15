@@ -5,6 +5,7 @@ import com.abin.lee.dao.UserInfoMapper;
 import com.abin.lee.model.OrderInfo;
 import com.abin.lee.model.UserInfo;
 import com.abin.lee.service.OrderService;
+import com.abin.lee.service.UserService;
 import com.abin.lee.vo.UserInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
@@ -27,7 +28,7 @@ import java.util.Date;
 @Slf4j
 @Service
 @Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
     @Resource
     UserInfoMapper userInfoMapper;
     @Resource
@@ -37,7 +38,7 @@ public class UserServiceImpl {
 
     public void add(UserInfoDto userInfoDto) throws InvocationTargetException, IllegalAccessException {
         String threadId = Thread.currentThread().getName();
-        log.error("add1---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+//        log.error("add1---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(userInfo, userInfoDto);
@@ -50,10 +51,10 @@ public class UserServiceImpl {
             @Override
             public void afterCompletion(int status) {
                 super.afterCompletion(status);
-                log.error("add2---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
-                log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
+//                log.error("add2---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+//                log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
                 if (status == TransactionSynchronization.STATUS_COMMITTED) {
-                    log.error("afterCompletion---------status == TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
+                    log.error("afterCompletion---------status == TransactionSynchronization.STATUS_COMMITTED={} threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", TransactionSynchronization.STATUS_COMMITTED, threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
                     String userId = userInfo.getId() + "";
                     orderService.add(userId);
                 }
@@ -62,7 +63,7 @@ public class UserServiceImpl {
 //        }else{
 //            log.error("else---TransactionSynchronizationManager.isActualTransactionActive()=.... ", TransactionSynchronizationManager.isActualTransactionActive());
 //        }
-        log.error("add3---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+//        log.error("add3---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 
     }
 

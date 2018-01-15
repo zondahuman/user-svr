@@ -23,8 +23,8 @@ import java.util.concurrent.Executors;
  */
 public class UserAddTest {
 
-    public static String httpURL = "http://172.16.2.145:7000/user/add";
-//    String httpURL = "http://localhost:8100/user/add";
+//    public static String httpURL = "http://172.16.2.145:7000/user/add";
+    public static String httpURL = "http://localhost:8100/user/add";
 
     @Test
     public void testUserAdd() {

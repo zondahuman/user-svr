@@ -245,52 +245,62 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andAgeEqualTo(Integer value) {
+        public Criteria andAgeEqualTo(String value) {
             addCriterion("age =", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeNotEqualTo(Integer value) {
+        public Criteria andAgeNotEqualTo(String value) {
             addCriterion("age <>", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeGreaterThan(Integer value) {
+        public Criteria andAgeGreaterThan(String value) {
             addCriterion("age >", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAgeGreaterThanOrEqualTo(String value) {
             addCriterion("age >=", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeLessThan(Integer value) {
+        public Criteria andAgeLessThan(String value) {
             addCriterion("age <", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeLessThanOrEqualTo(Integer value) {
+        public Criteria andAgeLessThanOrEqualTo(String value) {
             addCriterion("age <=", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeIn(List<Integer> values) {
+        public Criteria andAgeLike(String value) {
+            addCriterion("age like", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeNotLike(String value) {
+            addCriterion("age not like", value, "age");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgeIn(List<String> values) {
             addCriterion("age in", values, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeNotIn(List<Integer> values) {
+        public Criteria andAgeNotIn(List<String> values) {
             addCriterion("age not in", values, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeBetween(Integer value1, Integer value2) {
+        public Criteria andAgeBetween(String value1, String value2) {
             addCriterion("age between", value1, value2, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeNotBetween(Integer value1, Integer value2) {
+        public Criteria andAgeNotBetween(String value1, String value2) {
             addCriterion("age not between", value1, value2, "age");
             return (Criteria) this;
         }

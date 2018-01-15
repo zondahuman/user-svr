@@ -7,7 +7,7 @@ public class UserInfo {
 
     private String userName;
 
-    private Integer age;
+    private String age;
 
     private String mobile;
 
@@ -33,12 +33,12 @@ public class UserInfo {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setAge(String age) {
+        this.age = age == null ? null : age.trim();
     }
 
     public String getMobile() {
