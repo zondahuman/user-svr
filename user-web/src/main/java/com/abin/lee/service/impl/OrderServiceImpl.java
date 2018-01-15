@@ -5,9 +5,11 @@ import com.abin.lee.model.OrderInfo;
 import com.abin.lee.model.OrderInfoExample;
 import com.abin.lee.service.OrderService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +26,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void insert(OrderInfo orderInfo) {
+        this.orderInfoMapper.insert(orderInfo);
+    }
+
+    @Override
+    @Async
+    public void add(String userId) {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setUpdateTime(new Date());
+        orderInfo.setCreateTime(new Date());
+        orderInfo.setFlag("SUCCESS");
+        orderInfo.setUserId(userId);
+        orderInfo.setVersion(0);
         this.orderInfoMapper.insert(orderInfo);
     }
 

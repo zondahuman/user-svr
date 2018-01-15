@@ -13,6 +13,8 @@ public interface OrderService {
 
     void insert(OrderInfo orderInfo);
 
+    void add(String userId);
+
     OrderInfo findById(Integer id);
 
     List<OrderInfo> findAll(Integer id, String flag);

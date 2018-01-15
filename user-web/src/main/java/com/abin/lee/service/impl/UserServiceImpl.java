@@ -1,7 +1,10 @@
 package com.abin.lee.service.impl;
 
+import com.abin.lee.dao.OrderInfoMapper;
 import com.abin.lee.dao.UserInfoMapper;
+import com.abin.lee.model.OrderInfo;
 import com.abin.lee.model.UserInfo;
+import com.abin.lee.service.OrderService;
 import com.abin.lee.vo.UserInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
@@ -28,6 +31,8 @@ public class UserServiceImpl {
     @Resource
     UserInfoMapper userInfoMapper;
     @Resource
+    OrderService orderService;
+    @Resource
     BasicDataSource dataSource;
 
     public void add(UserInfoDto userInfoDto) throws InvocationTargetException, IllegalAccessException {
@@ -49,7 +54,8 @@ public class UserServiceImpl {
                 log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
                 if (status == TransactionSynchronization.STATUS_COMMITTED) {
                     log.error("afterCompletion---------status == TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
-
+                    String userId = userInfo.getId() + "";
+                    orderService.add(userId);
                 }
             }
         });
