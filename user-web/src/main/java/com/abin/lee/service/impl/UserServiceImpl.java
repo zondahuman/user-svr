@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public void add(UserInfoDto userInfoDto) throws InvocationTargetException, IllegalAccessException {
         String threadId = Thread.currentThread().getName();
 //        log.error("add1---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
-        try {
+//        try {
             UserInfo userInfo = new UserInfo();
             BeanUtils.copyProperties(userInfo, userInfoDto);
             userInfo.setCreateTime(new Date());
@@ -54,18 +54,17 @@ public class UserServiceImpl implements UserService {
 //                log.error("add2---threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
 //                log.error("afterCompletion---------TransactionSynchronization.STATUS_COMMITTED={} threadId={}", TransactionSynchronization.STATUS_COMMITTED, threadId);
                     if (status == TransactionSynchronization.STATUS_COMMITTED) {
-                        log.error("afterCompletion---------status == TransactionSynchronization.STATUS_COMMITTED={} threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", TransactionSynchronization.STATUS_COMMITTED, threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
+//                        log.error("afterCompletion---------status == TransactionSynchronization.STATUS_COMMITTED={} threadId={} maxActive={} maxIdle={} maxOpenPreparedStatements={} _numActive={} numIdle={} numTestsPerEvictionRun={}", TransactionSynchronization.STATUS_COMMITTED, threadId, dataSource.getMaxActive(), dataSource.getMaxIdle(), dataSource.getMaxOpenPreparedStatements(), dataSource.getNumActive(), dataSource.getNumIdle(), dataSource.getNumTestsPerEvictionRun());
                         String userId = userInfo.getId() + "";
                         orderService.add(userId);
                     }
                 }
             });
-        } catch (Exception e) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            log.error("userInfo={}", JsonUtil.toJson(userInfoDto), e);
-            e.printStackTrace();
-        } finally {
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("userInfo={}", JsonUtil.toJson(userInfoDto), e);
+////            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//        }
 //        }else{
 //            log.error("else---TransactionSynchronizationManager.isActualTransactionActive()=.... ", TransactionSynchronizationManager.isActualTransactionActive());
 //        }

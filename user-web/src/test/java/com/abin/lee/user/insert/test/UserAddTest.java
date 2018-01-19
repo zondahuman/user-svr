@@ -72,7 +72,7 @@ public class UserAddTest {
 
 
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
 //            ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 //            try {
 //                executorService.submit(new Runnable() {
