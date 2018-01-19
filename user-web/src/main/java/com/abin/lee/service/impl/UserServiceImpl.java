@@ -61,10 +61,10 @@ public class UserServiceImpl implements UserService {
                 }
             });
         } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             log.error("userInfo={}", JsonUtil.toJson(userInfoDto), e);
             e.printStackTrace();
         } finally {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 //        }else{
 //            log.error("else---TransactionSynchronizationManager.isActualTransactionActive()=.... ", TransactionSynchronizationManager.isActualTransactionActive());
