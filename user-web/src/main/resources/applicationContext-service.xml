@@ -14,7 +14,7 @@
 
 	<!--<context:component-scan base-package="com.abin.lee" />-->
 
-	<task:executor id="executor" pool-size="1-2" queue-capacity="1" rejection-policy="CALLER_RUNS"/>
+	<task:executor id="executor" pool-size="0-1" queue-capacity="1" rejection-policy="CALLER_RUNS"/>
 
 	<task:annotation-driven executor="executor"/>
 
